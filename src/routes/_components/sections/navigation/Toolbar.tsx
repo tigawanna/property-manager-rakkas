@@ -1,10 +1,8 @@
 import { ClientSuspense, Link } from "rakkasjs";
 import { SideDrawer } from "./SideDrawer";
-import { MiniSettingsModal } from "./mini-settings/MiniSettings";
 import { lazy } from "react";
-import { Image } from "@unpic/react";
-import { Icons } from "@/components/icons/Iconts";
 import { ThemeSwitcher } from "./ThemeSwitcher";
+import { Castle } from "lucide-react";
 const NavigationMenuLinks = lazy(() => import("./NavigationMenuLinks"));
 
 interface ToolbarProps {}
@@ -13,8 +11,7 @@ export function Toolbar({}: ToolbarProps) {
   return (
     <div className=" sticky top-0 z-30 flex  w-full items-center justify-between bg-inherit p-1">
       <Link href="/" className="p-2 text-2xl hover:text-secondary font-bold">
-
-        <Icons.writtenlogo className="text-secondary fill-secondary bg-transparent"/>
+        <Castle/>
       </Link>
       <div className="hidden items-center justify-end gap-2 px-2 md:flex">
         <ClientSuspense
