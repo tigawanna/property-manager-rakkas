@@ -31,7 +31,7 @@ export function SignInForm({ current }: SignInFormProps) {
     mutationFn: (vars: { usernameOrEmail: string; password: string }) => {
       return emailPasswordLogin({
         pb: page_ctx.locals.pb,
-        collection: "liquorstore_user",
+        collection: "property_staff",
         identity: vars.usernameOrEmail,
         password: vars.password,
       });
@@ -76,7 +76,7 @@ export function SignInForm({ current }: SignInFormProps) {
       return resetPassword({
         pb: page_ctx.locals.pb,
         email: vars.email,
-        collection: "liquorstore_user",
+        collection: "property_staff",
       });
     },
     meta: {

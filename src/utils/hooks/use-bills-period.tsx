@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { navigate, usePageContext } from "rakkasjs";
 import { getPrevMonthandYear } from "../helpers/date-helpers";
-import { BillsPeriod, MonthlyBills } from "@/routes/(dashboard)/bills/api/bills";
+import { BillsPeriod, MonthlyBills } from "@/routes/dashboard/bills/api/bills";
 
 
 

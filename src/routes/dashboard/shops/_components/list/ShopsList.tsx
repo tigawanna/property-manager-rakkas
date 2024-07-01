@@ -1,22 +1,9 @@
 import type { CollectionName } from "@/lib/pb/client";
 import { pbTryCatchWrapper } from "@/lib/pb/utils";
-import { ClientSuspense } from "rakkasjs";
-import {
-  type ResolveSelectWithExpand,
-  type Select,
-  and,
-  like,
-  ViewCollectionService,
-  SelectWithExpand,
-  or,
-} from "typed-pocketbase";
-
-import ClientSuspenseWrapper from "@/components/wrappers/ClientSuspenseWrapper";
+import { like, or } from "typed-pocketbase";
 import { usePocketbase } from "@/lib/pb/hooks/use-pb";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { PBTimeStamp } from "@/lib/pb/components/time/PBTimestamp";
-import { CreateBrandModal } from "../form/CreateShops";
-import { UpdateBrandModal, DeleteBrandModal } from "../form/UpdateShops";
 import { PBReturnedUseQueryError } from "@/components/error/PBReturnedUseQueryEror";
 
 interface ShopsListProps {
@@ -44,8 +31,6 @@ export function ShopsList({
           filter: or(
             like("tenant.username", debouncedValue),
             like("shop_number", debouncedValue),
-
-            // eq("verified", "yes")
           ),
           select: {
             expand: {
@@ -68,8 +53,15 @@ export function ShopsList({
       </div>
     );
   }
+  if (!data || !data.length) {
+    return (
+      <div className="w-full h-full min-h-[90vh] flex flex-col justify-center items-center">
+        <PBReturnedUseQueryError error={new Error("No shops found")} />
+      </div>
+    );
+  }
   return (
-    <div className="w-full h-full flex flex-col ">
+    <div className="w-full h-full min-h-screen flex flex-col ">
       <div className="w-full flex flex-wrap justify-center gap-2 p-2 overflow--y-scroll">
         {data.map((item) => (
           <div

@@ -35,7 +35,7 @@ export function SignUpForm({}: SignupFormProps) {
     (vars: typeof input) => {
       return createUser({
         pb: page_ctx.locals.pb,
-        collection: "liquorstore_user",
+        collection: "property_staff",
         data: vars,
       });
     },

@@ -6,17 +6,17 @@ export function DashboardLinks({}: DashboardLinksProps) {
   const parts = [
     {
       name: "Bills",
-      href: "/bills",
+      href: "/dashboard/bills",
       icon: <Receipt className="w-8 h-8" />,
     },
     {
       name: "Shops",
-      href: "/shops",
+      href: "/dashboard/shops",
       icon: <Store className="w-8 h-8" />,
     },
     {
       name: "Tenants",
-      href: "/tenants",
+      href: "/dashboard/tenants",
       icon: <Users2Icon className="w-8 h-8" />,
     },
   ];

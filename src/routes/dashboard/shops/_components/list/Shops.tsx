@@ -8,7 +8,7 @@ import { ShopsList } from "./ShopsList";
 interface ShopsProps {}
 
 export function Shops({}: ShopsProps) {
-  const searchParamKey = "cat";
+  const searchParamKey = "shop";
   const { isDebouncing, debouncedValue, setKeyword, keyword } =
     useDebouncedSearchWithhParams({ default_search_query: "" });
   const { searchParam } = useCustomSearchParams({
@@ -16,8 +16,8 @@ export function Shops({}: ShopsProps) {
     defaultValue: "1",
   });
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="w-full z-20 bg-base-200 sticky top-[10%]  px-3 flex flex-col md:flex-row justify-evenly gap-3 pr-5">
+    <div className="w-full h-full flex flex-col gap-2">
+      <div className="w-full z-20 bg-base-200 sticky top-[6%]  px-3 flex flex-col md:flex-row justify-evenly gap-3 pr-5">
         <div className="w-full flex gap-2 p-2">
           <h1 className="text-2xl font-bold bg-base-200/30 ">Shops</h1>
           {/* <AddNewTechFormModal /> */}

@@ -26,7 +26,7 @@ export function OAuthproviders({}: OAuthprovidersProps) {
       return tryCatchWrapper(
         oneClickOauthLogin({
           pb: locals.pb,
-          collection: "liquorstore_user",
+          collection: "property_staff",
           oauth_config: {
             provider,
           },
