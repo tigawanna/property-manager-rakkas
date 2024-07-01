@@ -26,6 +26,6 @@ export async function pbTryCatchWrapper<T>(
     const data = await fn;
     return { data, error: null };
   } catch (error: any) {
-    return { data: null, error };
+    return { data: null, error:error.message };
   }
 }

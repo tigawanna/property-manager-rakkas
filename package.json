@@ -87,7 +87,7 @@
     "devalue": "^4.3.2",
     "lexical": "^0.14.5",
     "lucide-react": "^0.354.0",
-    "pocketbase": "^0.21.1",
+    "pocketbase": "^0.21.3",
     "react": "^18.2.0",
     "react-day-picker": "^8.10.0",
     "react-dom": "^18.2.0",
@@ -99,7 +99,7 @@
     "react-responsive-pagination": "^2.4.2",
     "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
-    "typed-pocketbase": "^0.1.0",
+    "typed-pocketbase": "^0.1.1",
     "vaul": "^0.9.0",
     "zod": "^3.22.4"
   },

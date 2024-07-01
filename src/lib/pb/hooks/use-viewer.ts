@@ -17,7 +17,7 @@ export function useViewer() {
 
 export async function getViewer(pb: PocketBaseClient) {
   try {
-    const new_user = await pb?.from("liquorstore_user")?.authRefresh();
+    const new_user = await pb?.from("property_tenants")?.authRefresh();
     return new_user.record;
   } catch (error: any) {
     return null;

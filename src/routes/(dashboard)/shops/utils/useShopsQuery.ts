@@ -19,7 +19,7 @@ import {
   or,
   sort,
 } from "typed-pocketbase";
-import { ShopForm } from "../components/ShopForm";
+import { ShopForm } from "../old_components/ShopForm";
 import { CollectionModel } from "pocketbase";
 
 type SortFn = typeof sort<UtilityShopsResponse>;

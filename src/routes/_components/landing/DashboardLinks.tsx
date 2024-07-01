@@ -28,6 +28,7 @@ export function DashboardLinks({}: DashboardLinksProps) {
             <Link
               key={part.href}
               href={part.href}
+              prefetch="never"
               className="h-32 sm:h-[200px] w-[90%] md:w-[40%] flex flex-col items-center justify-center  bg-base-200 shadow-xl 
               hover:text-accent  rounded-lg"
             >
