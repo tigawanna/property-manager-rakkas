@@ -143,40 +143,6 @@ export interface ViewCollectionRecord {
 // utilities
 
 type MaybeArray<T> = T | T[];
-// ==== start of property_staff block =====
-
-
-export interface PropertyStaffResponse extends AuthCollectionResponse {
-	collectionName: 'property_staff';
-	name: string;
-	type: 'caretaker' | 'manager' | 'cashier';
-	avatar: string;
-}
-
-export interface PropertyStaffCreate extends AuthCollectionCreate {
-	name: string;
-	type: 'caretaker' | 'manager' | 'cashier';
-	avatar?: File | null;
-}
-
-export interface PropertyStaffUpdate extends AuthCollectionUpdate {
-	name?: string;
-	type?: 'caretaker' | 'manager' | 'cashier';
-	avatar?: File | null;
-}
-
-export interface PropertyStaffCollection {
-	type: 'auth';
-	collectionId: string;
-	collectionName: 'property_staff';
-	response: PropertyStaffResponse;
-	create: PropertyStaffCreate;
-	update: PropertyStaffUpdate;
-	relations: Record<string, never>;
-}
-
-// ==== end of property_staff block =====
-
 // ==== start of property_shops block =====
 
 
@@ -191,7 +157,7 @@ export interface PropertyShopsResponse extends BaseCollectionResponse {
 
 export interface PropertyShopsCreate extends BaseCollectionCreate {
 	shop_number: string;
-	tenant?: string;
+	tenant: string;
 	utils?: '' | 'elec' | 'water' | 'both' | 'none';
 	order?: number;
 	is_vacant?: boolean;
@@ -215,52 +181,12 @@ export interface PropertyShopsCollection {
 	create: PropertyShopsCreate;
 	update: PropertyShopsUpdate;
 	relations: {
-		tenant: PropertyTenantsCollection;
+		tenant: PropertyTenantsListCollection;
 		'property_bills(shop)': PropertyBillsCollection[];
 	};
 }
 
 // ==== end of property_shops block =====
-
-// ==== start of property_tenants_base block =====
-
-
-export interface PropertyTenantsBaseResponse extends BaseCollectionResponse {
-	collectionName: 'property_tenants_base';
-	name: string;
-	contact: string;
-	email: string;
-	details: string;
-	supa_id: string;
-}
-
-export interface PropertyTenantsBaseCreate extends BaseCollectionCreate {
-	name: string;
-	contact?: string;
-	email?: string;
-	details?: string;
-	supa_id?: string;
-}
-
-export interface PropertyTenantsBaseUpdate extends BaseCollectionUpdate {
-	name?: string;
-	contact?: string;
-	email?: string;
-	details?: string;
-	supa_id?: string;
-}
-
-export interface PropertyTenantsBaseCollection {
-	type: 'base';
-	collectionId: string;
-	collectionName: 'property_tenants_base';
-	response: PropertyTenantsBaseResponse;
-	create: PropertyTenantsBaseCreate;
-	update: PropertyTenantsBaseUpdate;
-	relations: Record<string, never>;
-}
-
-// ==== end of property_tenants_base block =====
 
 // ==== start of property_bills block =====
 
@@ -312,40 +238,6 @@ export interface PropertyBillsCollection {
 
 // ==== end of property_bills block =====
 
-// ==== start of property_tenants block =====
-
-
-export interface PropertyTenantsResponse extends AuthCollectionResponse {
-	collectionName: 'property_tenants';
-	phone: string;
-	avatar: string;
-}
-
-export interface PropertyTenantsCreate extends AuthCollectionCreate {
-	phone?: string;
-	avatar?: File | null;
-}
-
-export interface PropertyTenantsUpdate extends AuthCollectionUpdate {
-	phone?: string;
-	avatar?: File | null;
-}
-
-export interface PropertyTenantsCollection {
-	type: 'auth';
-	collectionId: string;
-	collectionName: 'property_tenants';
-	response: PropertyTenantsResponse;
-	create: PropertyTenantsCreate;
-	update: PropertyTenantsUpdate;
-	relations: {
-		'property_shops(tenant)': PropertyShopsCollection[];
-		'property_user(tenantId)': PropertyUserCollection[];
-	};
-}
-
-// ==== end of property_tenants block =====
-
 // ==== start of property_tenants_list block =====
 
 
@@ -369,7 +261,10 @@ export interface PropertyTenantsListCollection {
 	response: PropertyTenantsListResponse;
 	create: PropertyTenantsListCreate;
 	update: PropertyTenantsListUpdate;
-	relations: Record<string, never>;
+	relations: {
+		'property_shops(tenant)': PropertyShopsCollection[];
+		'property_user(tenant)': PropertyUserCollection[];
+	};
 }
 
 // ==== end of property_tenants_list block =====
@@ -382,21 +277,24 @@ export interface PropertyUserResponse extends AuthCollectionResponse {
 	role: 'staff' | 'tenant' | 'user';
 	pnone: string;
 	avatarUrl: string;
-	tenantId: string;
+	staff: string;
+	tenant: string;
 }
 
 export interface PropertyUserCreate extends AuthCollectionCreate {
 	role: 'staff' | 'tenant' | 'user';
 	pnone?: string;
 	avatarUrl?: string | URL;
-	tenantId?: string;
+	staff?: string;
+	tenant?: string;
 }
 
 export interface PropertyUserUpdate extends AuthCollectionUpdate {
 	role?: 'staff' | 'tenant' | 'user';
 	pnone?: string;
 	avatarUrl?: string | URL;
-	tenantId?: string;
+	staff?: string;
+	tenant?: string;
 }
 
 export interface PropertyUserCollection {
@@ -407,18 +305,47 @@ export interface PropertyUserCollection {
 	create: PropertyUserCreate;
 	update: PropertyUserUpdate;
 	relations: {
-		tenantId: PropertyTenantsCollection;
+		staff: PropertyStaffListCollection;
+		tenant: PropertyTenantsListCollection;
 	};
 }
 
 // ==== end of property_user block =====
 
+// ==== start of property_staff_list block =====
+
+
+export interface PropertyStaffListResponse extends BaseCollectionResponse {
+	collectionName: 'property_staff_list';
+	name: string;
+}
+
+export interface PropertyStaffListCreate extends BaseCollectionCreate {
+	name?: string;
+}
+
+export interface PropertyStaffListUpdate extends BaseCollectionUpdate {
+	name?: string;
+}
+
+export interface PropertyStaffListCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'property_staff_list';
+	response: PropertyStaffListResponse;
+	create: PropertyStaffListCreate;
+	update: PropertyStaffListUpdate;
+	relations: {
+		'property_user(staff)': PropertyUserCollection[];
+	};
+}
+
+// ==== end of property_staff_list block =====
+
 export type Schema = {
-	property_staff: PropertyStaffCollection;
 	property_shops: PropertyShopsCollection;
-	property_tenants_base: PropertyTenantsBaseCollection;
 	property_bills: PropertyBillsCollection;
-	property_tenants: PropertyTenantsCollection;
 	property_tenants_list: PropertyTenantsListCollection;
 	property_user: PropertyUserCollection;
+	property_staff_list: PropertyStaffListCollection;
 };

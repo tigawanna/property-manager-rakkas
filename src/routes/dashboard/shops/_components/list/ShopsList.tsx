@@ -30,13 +30,13 @@ export function ShopsList({
         pb?.from(collectionName).getFullList({
           sort: "-order",
           filter: or(
-            like("tenant.username", debouncedValue),
+            like("tenant.name", debouncedValue),
             like("shop_number", debouncedValue),
           ),
           select: {
             expand: {
               tenant: {
-                username: true,
+                name: true,
               },
             },
           },
@@ -96,11 +96,12 @@ export function ShopsList({
             </Link>
             <div className={"w-full flex gap-2 justify-end "}>
               <Link
+                preload={"never"}
                 href={`/dashboard/tenants/${shop.tenant}`}
                 className="text-2xl text-accent-content font-extralight overflow-hidden break-words hover:text-sky-400
                    "
               >
-                {shop?.expand?.tenant?.username}
+                {shop?.expand?.tenant?.name}
               </Link>
             </div>
 
