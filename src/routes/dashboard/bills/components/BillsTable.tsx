@@ -11,7 +11,7 @@ export function BillsTable({bills,editing=true}: BillTableProps) {
 const columns = billsTableColumn(editing);
   return (
     <div className="w-full h-full flex  ">
-      <DataTable columns={columns} data={bills} editing={editing}/>
+      <DataTable columns={columns} data={bills} editing={editing} />
     </div>
   );
 }

@@ -57,7 +57,11 @@ export type BillUpdateFields = Pick<
 export async function getBills(pb: PocketBaseClient, filter?: string) {
   try {
     const records = await pb.collection("property_bills").getFullList({
-      expand: expand({ shop: true }),
+      select:{
+        expand:{
+          shop: true
+        }
+      },
       filter,
     });
     return records;
@@ -115,8 +119,12 @@ export async function getMonthlyBills(
 export async function addBill(pb: PocketBaseClient, bill: BillMutationFields) {
   // console.log("creating bill ", bill)
   try {
-    const record = await pb.collection("property_bills").create(bill, {
-      expand: expand({ shop: true }),
+    const record = await pb.from("property_bills").create(bill, {
+      select:{
+        expand:{
+          shop: true
+        }
+      }
     });
     return record;
   } catch (error) {
@@ -127,8 +135,12 @@ export async function addBill(pb: PocketBaseClient, bill: BillMutationFields) {
 
 export async function updateBill(pb: PocketBaseClient, bill: BillUpdateFields) {
   try {
-    const record = await pb.collection("property_bills").update(bill.id, bill, {
-      expand:"shop"
+    const record = await pb.from("property_bills").update(bill.id, bill, {
+      select: {
+        expand: {
+          shop: true,
+        },
+      },
     });
     return record;
   } catch (error) {

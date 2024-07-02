@@ -10,25 +10,24 @@ interface BillsProps {}
 
 export function Bills({}: BillsProps) {
   const { period, setPeriod } = useBillsPeriod();
-  const location = useLocation()
+  const location = useLocation();
   const query = useBillsQuery(period);
   const bills = query?.data?.data?.result;
-  // const columns = billsTableColumn(true);
 
- const print_url = new URL(location.current)
- print_url.pathname="/dashboard/bills/print"
- print_url.searchParams.set("cm",period.curr_month.toString())
- print_url.searchParams.set("cy",period.curr_year.toString())
- print_url.searchParams.set("pm",period.prev_month.toString())
- print_url.searchParams.set("py",period.prev_year.toString())
 
+  const print_url = new URL(location.current);
+  print_url.pathname = "/dashboard/bills/print";
+  print_url.searchParams.set("cm", period.curr_month.toString());
+  print_url.searchParams.set("cy", period.curr_year.toString());
+  print_url.searchParams.set("pm", period.prev_month.toString());
+  print_url.searchParams.set("py", period.prev_year.toString());
 
   return (
-    <div className="w-full h-full min-h-screen flex flex-col  gap-2">
+    <div className="w-full h-full min-h-screen flex flex-col  gap-2 ">
       <PeriodPicker period={period} setPeriod={setPeriod} />
       <div className="h-full  flex flex-col justify-center items-center  p-3">
         {bills && (
-          <div className="h-full  flex flex-col justify-center items-center  p-3">
+          <div className="h-full  flex flex-col justify-center items-center  sticky top-0 z-50 p-3">
             <div className="w-full flex gap-2">
               <Link
                 className="hover:text-accent flex gap-4 btn btn-sm text-lg"
@@ -37,7 +36,7 @@ export function Bills({}: BillsProps) {
                 <Printer />
                 print
               </Link>
-              <BillsCaroussel bills={bills}/>
+              <BillsCaroussel bills={bills} />
             </div>
 
             <BillsTable bills={bills} editing={true} />
@@ -67,11 +66,10 @@ export function Bills({}: BillsProps) {
           )}
           {query.isError && (
             <div className="min-h-[70vh] flex flex-coll text-error justify-center items-center">
-              {query.error.message}
+              {query?.error?.message}
             </div>
           )}
         </div>
-        
       </div>
     </div>
   );

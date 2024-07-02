@@ -7,20 +7,17 @@ import { useBillsQuery } from "../utils/useBillsQuery";
 import { getMonthName } from "@/utils/date-helpers";
 import { useBillsPeriod } from "@/utils/hooks/use-bills-period";
 
-
-interface PrintProps {
-
-}
+interface PrintProps {}
 interface TheTableState {
-  title: string
-  bills: MonthlyBills[]
+  title: string;
+  bills: MonthlyBills[];
 }
-export default function PrintBills({}:PrintProps){
+export default function PrintBills({}: PrintProps) {
   const componentRef = useRef(null);
-const {period} = useBillsPeriod()
-const query = useBillsQuery(period)
-const bills = query.data?.data?.result
-  
+  const { period } = useBillsPeriod();
+  const query = useBillsQuery(period);
+  const bills = query.data?.data?.result;
+
   return (
     <div className="w-full p-5">
       <ReactToPrint
@@ -51,6 +48,4 @@ const bills = query.data?.data?.result
       )}
     </div>
   );
-};
-
-
+}

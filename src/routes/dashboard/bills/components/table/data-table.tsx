@@ -26,11 +26,12 @@ import {
 
 import React from "react";
 import { DataTablePagination } from "./data-table-pagination";
-import { DebouncedInput } from "@/components/form/debounced-input";
+
 import { RankingInfo } from "@tanstack/match-sorter-utils";
 import { fuzzyFilter } from "./utils";
 import { twMerge } from "tailwind-merge";
 import { isBillingNewMonth } from "../../utils/bill_utils";
+import { DebouncedInput } from "@/components/form/debounced-input";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -110,9 +111,9 @@ export function DataTable<TData, TValue>({
   }
 
   return (
-    <div className="flex flex-col gap-3 p-1 ">
+    <div className="flex flex-col  gap-3 p-1 ">
       {editing && (
-        <div className="sticky top-1 z-50">
+        <div className="sticky top-1 z-40 ">
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}
@@ -120,10 +121,10 @@ export function DataTable<TData, TValue>({
           />
         </div>
       )}
-      <Table>
+      <Table className="">
         <TableHeader
           className={twMerge(
-            " sticky top-[11%] bg-base-300 font-bold",
+            " sticky top-0 bg-base-300 font-bold z-50",
             theadClassName,
           )}
         >

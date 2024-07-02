@@ -15,7 +15,8 @@ import { usePageContext } from "rakkasjs";
 import { ErrorWrapper } from "@/components/wrappers/ErrorWrapper";
 import { Button } from "@/components/shadcn/ui/button";
 import { Loader } from "lucide-react";
-import { PbTheTextInput } from "@/lib/pb/components/form/PBTheTextInput";
+import { PbTheTextInput } from "@/lib/pb/components/form/input-parts/PBTheTextInput";
+
 
 interface BillsFormProps {
   bill: MonthlyBills;
@@ -24,7 +25,7 @@ interface BillsFormProps {
 }
 
 export function BillsForm({ bill, setOpen,next }: BillsFormProps) {
-  console.log("====== BILLS IN FORM ========== ",bill)
+  // console.log("====== BILLS IN FORM ========== ",bill)
   const page_ctx = usePageContext();
   const pb = page_ctx.locals.pb;
   const is_new_bill = isBillingNewMonth(bill);
@@ -54,7 +55,7 @@ export function BillsForm({ bill, setOpen,next }: BillsFormProps) {
 
   const new_bill_mutation = useMutation({
     mutationFn: (input: BillMutationFields) => addBill(pb, input),
-    meta: { invalidates: [["monthly-bills"]] },
+    meta: { invalidates: ["monthly-bills"] },
     onError(error, variables, context) {
       setError({ name: "main", message: concatErrors(error) });
     },
@@ -69,9 +70,10 @@ export function BillsForm({ bill, setOpen,next }: BillsFormProps) {
       setOpen(false);
     },
   });
+  
   const update_bill_mutation = useMutation({
     mutationFn: (input: BillUpdateFields) => updateBill(pb, input),
-    meta: { invalidates: [["monthly-bills"]] },
+    meta: { invalidates: ["monthly-bills"] },
     onError(error, variables, context) {
       setError({ name: "main", message: concatErrors(error) });
     },

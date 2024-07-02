@@ -1,9 +1,7 @@
-import {
-  SelectOption,
-  SimpleSelect,
-} from "@/components/form/react-select/SimpleSelect";
+
 import { getPrevMonthandYear } from "@/utils/date-helpers";
 import { period_month_options, period_year_options } from "../../utils/bill_options";
+import { SelectOption, SimpleSelect } from "../form/react-select/SimpleSelect";
 
 export interface BillsPeriod {
   curr_month: number;
@@ -64,7 +62,7 @@ export function PeriodPicker({ period, setPeriod }: PeriodPickerProps) {
   };
 
   return (
-    <div className="w-full   flex flex-col items-center justify-center">
+    <div className="w-full flex flex-col items-center justify-center">
       <div className="w-full h-full flex flex-wrap items-center justify-center gap-1">
 
 
