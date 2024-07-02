@@ -5,6 +5,7 @@ import { usePocketbase } from "@/lib/pb/hooks/use-pb";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { PBTimeStamp } from "@/lib/pb/components/time/PBTimestamp";
 import { PBReturnedUseQueryError } from "@/components/error/PBReturnedUseQueryEror";
+import { Link } from "rakkasjs";
 
 interface ShopsListProps {
   searchParamKey: string;
@@ -63,23 +64,61 @@ export function ShopsList({
   return (
     <div className="w-full h-full min-h-screen flex flex-col ">
       <div className="w-full flex flex-wrap justify-center gap-2 p-2 overflow--y-scroll">
-        {data.map((item) => (
+        {data.map((shop) => (
           <div
-            key={item.id}
-            className="relative h-[100px] p-2 w-[95%] md:w-[45%] lg:w-[30%]  hover:brightness-75 justify-between  flex   bg-base-100 gap-1 rounded-lg group "
+            key={shop.id}
+            style={{
+              // filter: shop.is_vacant ? 'blur(1px)' : '',
+              backgroundColor: shop.is_vacant ? "#3A0806" : "",
+            }}
+            className="border  border-accent rounded-lg 
+                w-full p-5 md:w-[45%] lg:w-[30%] md:h-[200px] 
+                flex flex-col gap-2 shadow-lg @container hover:brightness-95"
           >
-            <div className="w-full gap-2 flex flex-col ">
-              <h2 className="text-xl font-bold">{item.shop_number}</h2>
-              <div className="badge badge-outline">
-                {" "}
-                {item.expand?.tenant?.username}
+            <Link
+              href={`${shop.id}`}
+              className="w-full h-full flex flex-col items-center 
+                   "
+            >
+              {/*top  */}
+              <div className="w-full flex flex-col items-end gap-1 ">
+                <h2 className="font-bold text-6xl overflow-hidden overflow-elipsis w-full text-end">
+                  {shop.shop_number}
+                </h2>
+                <div className="flex flex-col items-end gap-0">
+                  {shop.is_vacant && (
+                    <h2 className="text-accent font-bold">VACANT</h2>
+                  )}
+                </div>
               </div>
 
-              <PBTimeStamp
-                timestamp={item.created}
-                label="Created"
-                className="justify-start"
-              />
+              {/*bottom */}
+            </Link>
+            <div className={"w-full flex gap-2 justify-end "}>
+              <Link
+                href={`/dashboard/tenants/${shop.tenant}`}
+                className="text-2xl text-accent-content font-extralight overflow-hidden break-words hover:text-sky-400
+                   "
+              >
+                {shop?.expand?.tenant?.username}
+              </Link>
+            </div>
+
+            <div className="w-full flex  justify-between items-center px-2 ">
+              {/* <UtilIcons utils={shop.utils} /> */}
+              <h4 className="border  rounded-full p-1 aspect-square">
+                {shop.order}
+              </h4>
+              {/* {shop && <MutateShopModal updating shop={shop} />} */}
+              {/* <MutateShop
+                user={user}
+                shop={shop}
+                updating
+                custom_icon={{
+                  Icon: FaRegEdit,
+                  size: "20",
+                }}
+              /> */}
             </div>
           </div>
         ))}

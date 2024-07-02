@@ -1,17 +1,21 @@
-import { tryCatchWrapper } from "@/utils/async";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Link, PageProps, usePageContext } from "rakkasjs";
-import { sort, expand } from "typed-pocketbase";
 import { TenantForm } from "./components/TenatForm";
 import { Loader } from "lucide-react";
+import { pbTryCatchWrapper } from "@/lib/pb/utils";
 export default function TenantPage({ params }: PageProps) {
   const page_ctx = usePageContext();
-  const query = useQuery({
-    queryKey: ["utility_tenants", params.id],
+  const query = useSuspenseQuery({
+    queryKey: ["property_tenants", params.id],
     queryFn: () =>
-      tryCatchWrapper(
-        page_ctx.locals.pb?.collection("utility_tenants").getOne(params.id, {
-          expand: expand({ "utility_shops(tenant)": true }),
+      pbTryCatchWrapper(
+        page_ctx.locals.pb?.from("property_tenants").getOne(params.id, {
+          // expand: expand({ "utility_shops(tenant)": true }),
+          select: {
+            expand: {
+              "property_shops(tenant)": true,
+            },
+          },
         }),
       ),
   });
