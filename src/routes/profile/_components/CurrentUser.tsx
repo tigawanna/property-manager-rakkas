@@ -9,7 +9,7 @@ interface CurrentUserProps {
 export function CurrentUser({}:CurrentUserProps){
 const {data} = useViewer();
 const userImg = getFileURL({
-  collection_id_or_name: "property_staff",
+  collection_id_or_name: "property_user",
   record_id: data?.id,
   //   @ts-expect-error
   file_name: data?.avatar,

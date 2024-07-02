@@ -4,7 +4,6 @@ import { Link, navigate, useLocation, usePageContext } from "rakkasjs";
 import { useMutation, useQueryClient } from "rakkasjs";
 import { useFormHook } from "@/components/form/useForm";
 import { useState } from "react";
-import { Loader } from "lucide-react";
 import { PbTheTextInput } from "@/lib/pb/components/form/input-parts/PBTheTextInput";
 import { createUser } from "@/lib/pb/auth";
 import { toast } from "sonner";
@@ -35,8 +34,8 @@ export function SignUpForm({}: SignupFormProps) {
     (vars: typeof input) => {
       return createUser({
         pb: page_ctx.locals.pb,
-        collection: "property_staff",
-        data: vars,
+        collection: "property_user",
+        data: {...vars,role:"user"},
       });
     },
     {

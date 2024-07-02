@@ -31,7 +31,7 @@ export function SignInForm({ current }: SignInFormProps) {
     mutationFn: (vars: { usernameOrEmail: string; password: string }) => {
       return emailPasswordLogin({
         pb: page_ctx.locals.pb,
-        collection: "property_staff",
+        collection: "property_user",
         identity: vars.usernameOrEmail,
         password: vars.password,
       });
@@ -43,6 +43,7 @@ export function SignInForm({ current }: SignInFormProps) {
       if (data?.data) {
         // qc.invalidateQueries({ queryKey: ["viewer"] });
         const return_to = current.searchParams.get("return_to");
+        console.log({ return_to });
         navigate(return_to ?? "/");
         sonnerToast({
           title: "welcome",
@@ -76,7 +77,7 @@ export function SignInForm({ current }: SignInFormProps) {
       return resetPassword({
         pb: page_ctx.locals.pb,
         email: vars.email,
-        collection: "property_staff",
+        collection: "property_user",
       });
     },
     meta: {

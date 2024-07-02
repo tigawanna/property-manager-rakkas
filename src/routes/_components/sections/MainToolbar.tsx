@@ -1,17 +1,20 @@
 import { ClientSuspense, Link } from "rakkasjs";
-import { SideDrawer } from "./SideDrawer";
+import { SideDrawer } from "./navigation/SideDrawer";
 import { lazy } from "react";
-import { ThemeSwitcher } from "./ThemeSwitcher";
+import { ThemeSwitcher } from "./navigation/ThemeSwitcher";
 import { Castle } from "lucide-react";
-const NavigationMenuLinks = lazy(() => import("./NavigationMenuLinks"));
+import { MiniSettingsModal } from "./navigation/mini-settings/MiniSettings";
+const NavigationMenuLinks = lazy(
+  () => import("./navigation/NavigationMenuLinks"),
+);
 
-interface ToolbarProps {}
+interface MainToolbarProps {}
 
-export function Toolbar({}: ToolbarProps) {
+export function MainToolbar({}: MainToolbarProps) {
   return (
     <div className=" sticky top-0 z-30 flex  w-full items-center justify-between bg-inherit p-1">
       <Link href="/" className="p-2 text-2xl hover:text-secondary font-bold">
-        <Castle/>
+        <Castle />
       </Link>
       <div className="hidden items-center justify-end gap-2 px-2 md:flex">
         <ClientSuspense
@@ -31,16 +34,17 @@ export function Toolbar({}: ToolbarProps) {
           }
         >
           <div className="flex gap-2 justify-center items-center">
-          {/* <MiniSettingsModal /> */}
-            <ThemeSwitcher/>
+            <MiniSettingsModal />
+            <ThemeSwitcher />
           </div>
-
         </ClientSuspense>
       </div>
       {/* sidebar */}
 
       <div className="relative flex w-full justify-end p-2 md:hidden">
-        <ClientSuspense fallback={<div className="h-6 bg-base-100 skeleton " />}>
+        <ClientSuspense
+          fallback={<div className="h-6 bg-base-100 skeleton " />}
+        >
           <SideDrawer />
         </ClientSuspense>
       </div>

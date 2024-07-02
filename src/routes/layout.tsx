@@ -6,18 +6,14 @@ import {
 } from "rakkasjs";
 import ErrorBoundaryComponent from "@/components/wrappers/ErrorBoundaryComponent";
 import "./index.css";
-
 import { TailwindIndicator } from "@/components/others/tailwind-indicator";
 import { MainFooter } from "./_components/sections/MainFooter";
-import { Toolbar } from "@/routes/_components/sections/navigation/Toolbar";
+import { MainToolbar } from "@/routes/_components/sections/MainToolbar";
 import { Toaster } from "@/components/shadcn/ui/sonner";
 import { getSSRFriendlyTheme } from "@/lib/rakkas/theme";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "@/components/pagination/pagination.css";
-import { useEffect } from "react";
-import { usePocketbase } from "@/lib/pb/hooks/use-pb";
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { pbTryCatchWrapper } from "@/lib/pb/utils";
+
 function MainLayout({ children }: LayoutProps) {
 
 
@@ -25,7 +21,7 @@ function MainLayout({ children }: LayoutProps) {
   return (
     <ErrorBoundaryComponent>
       <div className="flex h-full w-full  flex-col items-center justify-center bg-base-200 ">
-        <Toolbar />
+        <MainToolbar />
         {children}
         <TailwindIndicator />
         <MainFooter />

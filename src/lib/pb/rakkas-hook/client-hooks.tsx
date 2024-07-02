@@ -12,10 +12,10 @@ const pocketbaseClientHooksFactory: ClientPluginFactory = (_, options) => {
             import.meta.env.RAKKAS_PB_URL,
           );
           pageContext.locals.pb?.authStore.onChange(() => {
-            pageContext.requestContext?.setCookie?.(
-              "set-cookie",
-              pageContext.locals.pb?.authStore.exportToCookie(),
-            );
+            // pageContext.requestContext?.setCookie?.(
+            //   "set-cookie",
+            //   pageContext.locals.pb?.authStore.exportToCookie(),
+            // );
           });
         }
       },

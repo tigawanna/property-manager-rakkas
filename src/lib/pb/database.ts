@@ -340,10 +340,78 @@ export interface PropertyTenantsCollection {
 	update: PropertyTenantsUpdate;
 	relations: {
 		'property_shops(tenant)': PropertyShopsCollection[];
+		'property_user(tenantId)': PropertyUserCollection[];
 	};
 }
 
 // ==== end of property_tenants block =====
+
+// ==== start of property_tenants_list block =====
+
+
+export interface PropertyTenantsListResponse extends BaseCollectionResponse {
+	collectionName: 'property_tenants_list';
+	name: string;
+}
+
+export interface PropertyTenantsListCreate extends BaseCollectionCreate {
+	name?: string;
+}
+
+export interface PropertyTenantsListUpdate extends BaseCollectionUpdate {
+	name?: string;
+}
+
+export interface PropertyTenantsListCollection {
+	type: 'base';
+	collectionId: string;
+	collectionName: 'property_tenants_list';
+	response: PropertyTenantsListResponse;
+	create: PropertyTenantsListCreate;
+	update: PropertyTenantsListUpdate;
+	relations: Record<string, never>;
+}
+
+// ==== end of property_tenants_list block =====
+
+// ==== start of property_user block =====
+
+
+export interface PropertyUserResponse extends AuthCollectionResponse {
+	collectionName: 'property_user';
+	role: 'staff' | 'tenant' | 'user';
+	pnone: string;
+	avatarUrl: string;
+	tenantId: string;
+}
+
+export interface PropertyUserCreate extends AuthCollectionCreate {
+	role: 'staff' | 'tenant' | 'user';
+	pnone?: string;
+	avatarUrl?: string | URL;
+	tenantId?: string;
+}
+
+export interface PropertyUserUpdate extends AuthCollectionUpdate {
+	role?: 'staff' | 'tenant' | 'user';
+	pnone?: string;
+	avatarUrl?: string | URL;
+	tenantId?: string;
+}
+
+export interface PropertyUserCollection {
+	type: 'auth';
+	collectionId: string;
+	collectionName: 'property_user';
+	response: PropertyUserResponse;
+	create: PropertyUserCreate;
+	update: PropertyUserUpdate;
+	relations: {
+		tenantId: PropertyTenantsCollection;
+	};
+}
+
+// ==== end of property_user block =====
 
 export type Schema = {
 	property_staff: PropertyStaffCollection;
@@ -351,4 +419,6 @@ export type Schema = {
 	property_tenants_base: PropertyTenantsBaseCollection;
 	property_bills: PropertyBillsCollection;
 	property_tenants: PropertyTenantsCollection;
+	property_tenants_list: PropertyTenantsListCollection;
+	property_user: PropertyUserCollection;
 };
