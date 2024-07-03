@@ -27,7 +27,7 @@ export function Bills({}: BillsProps) {
       <PeriodPicker period={period} setPeriod={setPeriod} />
       <div className="h-full  flex flex-col justify-center items-center  p-3">
         {bills && (
-          <div className="h-full  flex flex-col justify-center items-center  sticky top-0 z-50 p-3">
+          <div className="h-full flex flex-col justify-center items-center  p-3">
             <div className="w-full flex gap-2">
               <Link
                 className="hover:text-accent flex gap-4 btn btn-sm text-lg"
@@ -40,6 +40,7 @@ export function Bills({}: BillsProps) {
             </div>
 
             <BillsTable bills={bills} editing={true} />
+
           </div>
         )}
         <div className=" min-h-[60vh] w-full flex items-center justify-center ">

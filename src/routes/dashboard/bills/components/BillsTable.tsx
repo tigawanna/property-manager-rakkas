@@ -10,7 +10,7 @@ interface BillTableProps {
 export function BillsTable({bills,editing=true}: BillTableProps) {
 const columns = billsTableColumn(editing);
   return (
-    <div className="w-full h-full flex  ">
+    <div className="w-full  flex">
       <DataTable columns={columns} data={bills} editing={editing} />
     </div>
   );

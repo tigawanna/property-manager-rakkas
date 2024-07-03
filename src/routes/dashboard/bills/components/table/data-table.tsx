@@ -113,7 +113,7 @@ export function DataTable<TData, TValue>({
   return (
     <div className="flex flex-col  gap-3 p-1 ">
       {editing && (
-        <div className="sticky top-1 z-40 ">
+        <div className="sticky top-[5%] z-20 ">
           <DebouncedInput
             value={globalFilter ?? ""}
             onChange={(value) => setGlobalFilter(String(value))}
@@ -124,7 +124,7 @@ export function DataTable<TData, TValue>({
       <Table className="">
         <TableHeader
           className={twMerge(
-            " sticky top-0 bg-base-300 font-bold z-50",
+            "bg-base-300 font-bold z-30",
             theadClassName,
           )}
         >
